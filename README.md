@@ -13,7 +13,7 @@
 
 
 ![截图1](./screenshots/score.jpg)
-
+<details>
 
 
 ## 如何使用
