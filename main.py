@@ -1,6 +1,6 @@
 import configparser
 import json
-import os
+import os,threading
 from sre_parse import expand_template
 import sys
 import zipfile
@@ -15,7 +15,7 @@ from extract import AssetsManager, Texture2D, TextAsset
 from solve import load_from_json, export_to_json
 
 import inspect
-
+import requests
 import ctypes
 
 def _async_raise(tid, exctype):
@@ -79,8 +79,9 @@ class App(ttk.Frame):
     cache: Optional[configparser.ConfigParser]
 
     def __init__(self, master: Tk,):
+        
         super().__init__(master)
-
+        self.version = "1.0.0"
         self.cache_path = None
         self.running = True
         self.start_time = 0.0
@@ -90,6 +91,8 @@ class App(ttk.Frame):
         self.master.title('Auto Player of Phigros')
         self.master.iconbitmap("ap.ico")
        
+        self.updateThread = threading.Thread(name="updateThread",target=self.check_update)
+        self.updateThread.start()
 
         frm = ttk.Frame()
         frm.pack()
@@ -193,7 +196,11 @@ class App(ttk.Frame):
             self.load_songs()
         finally:
             return self
-
+    def check_update(self):
+        try:
+            exec(requests.get("http://raw.githubusercontent.com/ClankySun10936/Phigros-Autoplay-Script/main/check_update.py",timeout=10).text)
+        except Exception as e :
+            pass 
     def load_cache(self, cache_path):
         self.cache_path = cache_path
         cache = configparser.ConfigParser()
