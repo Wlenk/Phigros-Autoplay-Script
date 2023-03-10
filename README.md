@@ -1,4 +1,4 @@
-# 基于[Phiasp](https://github.com/kvarenzn/phisap)项目修改的Phigros Autoplay Script
+# 基于[Phisap](https://github.com/kvarenzn/phisap)项目修改的Phigros Autoplay Script
 
 
 + 使用ttkbootstrap优化了UI , 删去了无用的界面
