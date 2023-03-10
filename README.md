@@ -8,12 +8,10 @@
 
 ## 成果展示
 
-<details>
-<summary>如图</summary>
-
+如图
 
 ![截图1](./screenshots/score.jpg)
-</details>
+
 
 
 ## 如何使用
