@@ -1,6 +1,5 @@
 from judge_line import JudgeLine
 
-
 class Chart:
     version: int
     offset: float
@@ -15,6 +14,21 @@ class Chart:
 
     @classmethod
     def from_dict(cls, d: dict):
+        #try:
+        notesCounter = 0
+        #if 'judgeLineList' in d:
+        for judge_line in d['judgeLineList']:
+            judge_line['numOfNotes'] = len(judge_line['notesAbove']) + len(judge_line['notesBelow'])
+            notesCounter += judge_line['numOfNotes']
+            judge_line['numOfNotesAbove'] = len(judge_line['notesAbove']) 
+            judge_line['numOfNotesBelow'] = len(judge_line['notesBelow'])
+            #print("Add|"+str(judge_line['numOfNotes'])+"|"+str(judge_line['numOfNotesAbove'])+":"+str(judge_line['numOfNotesBelow'])+"|["+str(notesCounter)+"]")
+        #print("Notes:"+str(notesCounter))
+        d['numOfNotes']=notesCounter
+        #else:
+        #    print("None")
+        #except Exception as e:
+        #    traceback.print_exc()
         version = d['formatVersion']
         if version == 1:
             return cls(version, d['offset'], d['numOfNotes'],
